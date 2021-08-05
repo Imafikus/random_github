@@ -1,7 +1,7 @@
 from models import SingleGetContentObj
-import api 
 from typing import List
-
+import api 
+import trending
 
 def get_all_raw_file_urls(data: List[SingleGetContentObj]):
     
@@ -12,8 +12,8 @@ def get_all_raw_file_urls(data: List[SingleGetContentObj]):
             raw_urls.append(item.download_url)
 
 if __name__ == "__main__":
-    data = api.get_repo_contents('imafikus', 'random_github')
+    # data = api.get_repo_contents('imafikus', 'random_github')
     
-    raw_urls = get_all_raw_file_urls(data)
+    # raw_urls = get_all_raw_file_urls(data)
     
-    print(raw_urls)
+    trending.extract_trending_repos()

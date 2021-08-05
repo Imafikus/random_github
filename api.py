@@ -17,3 +17,7 @@ def get_repo_contents(username: str, repo_name: str) -> List[SingleGetContentObj
 def get_raw_data(url: str):
     data = requests.get(url)
     return data.text
+    
+def get_trending_page():
+    data = requests.get('https://github.com/trending?spoken_language_code=en')
+    return data.text
