@@ -12,8 +12,6 @@ def get_all_raw_file_urls(data: List[SingleGetContentObj]):
             raw_urls.append(item.download_url)
 
 if __name__ == "__main__":
-    # data = api.get_repo_contents('imafikus', 'random_github')
-    
-    # raw_urls = get_all_raw_file_urls(data)
-    
-    trending.extract_trending_repos()
+    repos = trending.extract_trending_repos()
+    for repo in repos:
+        print(repo)

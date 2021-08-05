@@ -7,8 +7,8 @@ from typing import List
 BASE_URL = 'https://api.github.com'
 
 
-def get_repo_contents(username: str, repo_name: str) -> List[SingleGetContentObj]:
-    data = requests.get(f'{BASE_URL}/repos/{username}/{repo_name}/contents/')    
+def get_repo_contents(owner: str, repo_name: str) -> List[SingleGetContentObj]:
+    data = requests.get(f'{BASE_URL}/repos/{owner}/{repo_name}/contents/')    
     if not data.ok:
         return []
     
