@@ -1,14 +1,16 @@
-import requests
 from models import SingleGetContentObj
-from pydantic import parse_obj_as
+import api 
 from typing import List
 
-BASE_URL = 'https://api.github.com'
 
+def get_all_file_urls(data: List[SingleGetContentObj]):
+    for item in data:
+        if item.type == 'file':
+            print(f'File url: {item.download_url}')
 
 if __name__ == "__main__":
-    data = requests.get(f'https://api.github.com/repos/imafikus/random_github/contents/')    
+    data = api.get_repo_contents('imafikus', 'random_github')
     
-    res = parse_obj_as(List[SingleGetContentObj], data.json())
+    # get_all_file_urls(data)
     
-    print(res)
+    print(api.get_raw_data('https://raw.githubusercontent.com/Imafikus/random_github/master/.gitignore'))
