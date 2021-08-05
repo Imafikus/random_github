@@ -31,7 +31,7 @@ class SingleGetContentObj(BaseModel):
     url: str
     html_url: str
     git_url: str 
-    download_url: str 
+    download_url: str = None
     type: str
     _links: LinksType
 

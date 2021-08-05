@@ -1,17 +1,9 @@
-from models import SingleGetContentObj
-from typing import List
-import api 
-import trending
-
-def get_all_raw_file_urls(data: List[SingleGetContentObj]):
-    
-    raw_urls = []
-    
-    for item in data:
-        if item.type == 'file':
-            raw_urls.append(item.download_url)
+from api import get_repo_contents
+import data_extractor
 
 if __name__ == "__main__":
-    repos = trending.extract_trending_repos()
-    for repo in repos:
-        print(repo)
+    repos = data_extractor.get_repos_with_supported_languages()
+    test = repos[0]
+    
+    for f in data_extractor.extract_all_language_files(test):
+        print(f)

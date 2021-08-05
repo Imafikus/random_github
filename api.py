@@ -7,12 +7,14 @@ from typing import List
 BASE_URL = 'https://api.github.com'
 
 
-def get_repo_contents(owner: str, repo_name: str) -> List[SingleGetContentObj]:
-    data = requests.get(f'{BASE_URL}/repos/{owner}/{repo_name}/contents/')    
+def get_repo_contents(owner: str, repo_name: str, folder_path='') -> List[SingleGetContentObj]:
+    print(f'getting data for: {BASE_URL}/repos/{owner}/{repo_name}/contents/{folder_path}')
+    data = requests.get(f'{BASE_URL}/repos/{owner}/{repo_name}/contents/{folder_path}')    
     if not data.ok:
         return []
     
     return parse_obj_as(List[SingleGetContentObj], data.json())
+    
 
 def get_raw_data(url: str):
     data = requests.get(url)
