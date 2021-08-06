@@ -15,6 +15,9 @@ def get_repo_contents(owner: str, repo_name: str, folder_path='') -> List[Single
     
     return parse_obj_as(List[SingleGetContentObj], data.json())
     
+def get_content(url: str) -> List[SingleGetContentObj]:
+    data = requests.get(url)
+    return parse_obj_as(List[SingleGetContentObj], data.json())
 
 def get_raw_data(url: str):
     data = requests.get(url)

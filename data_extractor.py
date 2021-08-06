@@ -1,45 +1,52 @@
-from api import get_repo_contents
+from api import get_content, get_repo_contents
 from models import SingleGetContentObj
 from typing import List
 import trending
 
 SUPPORTED_LANGUAGES = ['Python']
 EXTENSION_MAPPINGS = {
-    'Python': 'md' #FIXME
+    'Python': 'py'
 }
 
-def get_all_raw_file_urls(data: List[SingleGetContentObj]):
+def extract_files(data: List[SingleGetContentObj]) -> List[SingleGetContentObj]:
+    return list(filter(lambda item: item.type == 'file', data))
     
-    raw_urls = []
+def extract_dirs(data: List[SingleGetContentObj]) -> List[SingleGetContentObj]:
+    return list(filter(lambda item: item.type == 'dir', data))
+
+def extract_all_language_files(data: List[SingleGetContentObj], language: str) -> List[SingleGetContentObj]:
+    language_files = []
     
-    for item in data:
-        if item.type == 'file':
-            raw_urls.append(item.download_url)
-    return raw_urls
+    for f in data:
+        split_url = f.download_url.split('.')
+        extension = split_url[-1]
+        
+        if extension == EXTENSION_MAPPINGS[language]:
+            language_files.append(f)     
+            
+    return language_files
+
             
 def get_repos_with_supported_languages() -> List[trending.Repository]:
     all_repos = trending.extract_trending_repos()
     supported_repos = list(filter(lambda repo: repo.language in SUPPORTED_LANGUAGES, all_repos))
     return supported_repos
     
-def get_all_files(repo: trending.Repository, file_list = []):
-    pass
-
-def extract_all_language_files(repo: trending.Repository) -> List[str]:
-    data = get_repo_contents(repo.owner, repo.name)
-    raw_urls = get_all_raw_file_urls(data)
+def get_all_files(repo: trending.Repository) -> List[SingleGetContentObj]:
+    content = get_repo_contents(repo.owner, repo.name)
+    dirs = extract_dirs(content)
+    files = extract_files(content)
     
-    language_files = []
-    
-    for url in raw_urls:
-        split_url = url.split('.')
-        extension = split_url[-1]
-        print(f'extension: {extension}')
-        print(extension == EXTENSION_MAPPINGS[repo.language])
+    if len(dirs) == 0:
+        return files
         
-        if extension == EXTENSION_MAPPINGS[repo.language]:
-            language_files.append(url)     
-            
-    return language_files
-    
-    
+    while dirs != []:
+        current_dir = dirs.pop()
+        print('current_dir: ', current_dir.name)
+        new_content = get_content(current_dir.url)
+        new_dirs = extract_dirs(new_content)
+        new_files = extract_files(new_content)
+        files += new_files
+        dirs += new_dirs
+        
+    return files    
