@@ -1,6 +1,6 @@
 from typing import List
 from bs4 import BeautifulSoup
-import api
+import github_api
 
 class Repository:
     def __init__(self, owner, name, language) -> None:
@@ -13,7 +13,7 @@ class Repository:
     
     
 def extract_trending_repos() -> List[Repository]:
-    raw_html = api.get_trending_page()
+    raw_html = github_api.get_trending_page()
     
     soup = BeautifulSoup(raw_html, 'html.parser')
     

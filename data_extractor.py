@@ -1,4 +1,4 @@
-from api import get_content, get_repo_contents
+from github_api import get_content, get_repo_contents
 from models import SingleGetContentObj
 from typing import List
 import trending
