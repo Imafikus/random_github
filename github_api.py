@@ -8,11 +8,11 @@ import os
 load_dotenv()
 
 BASE_URL = 'https://api.github.com'
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-USER = os.environ['USER']
+GITHUB_ACCESS_TOKEN = os.environ['GITHUB_ACCESS_TOKEN']
+GITHUB_USERNAME = os.environ['GITHUB_USERNAME']
 
 def _make_get_request(url: str): 
-    return requests.get(url, auth=(USER, ACCESS_TOKEN))    
+    return requests.get(url, auth=(GITHUB_USERNAME, GITHUB_ACCESS_TOKEN))    
 
 def get_repo_contents(owner: str, repo_name: str, folder_path='') -> List[SingleGetContentObj]:
     print(f'getting data for: {BASE_URL}/repos/{owner}/{repo_name}/contents/{folder_path}')
