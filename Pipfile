@@ -8,6 +8,8 @@ requests = "*"
 pydantic = "*"
 beautifulsoup4 = "*"
 python-dotenv = "*"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 

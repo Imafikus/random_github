@@ -1,7 +1,11 @@
 import comment_extractor
+from fastapi import FastAPI
 
-if __name__ == "__main__":
-    
-    print('chosen_comment: ', comment_extractor.get_comment())
+app = FastAPI()
+
+@app.get('/comment')
+def read_item():
+    return {'comment': comment_extractor.get_comment()}
+
             
         
