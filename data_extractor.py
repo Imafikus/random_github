@@ -1,7 +1,7 @@
-from github_api import get_content, get_repo_contents
 from models import SingleGetContentObj
 from typing import List
 import trending
+import github_api
 
 SUPPORTED_LANGUAGES = ['Python']
 EXTENSION_MAPPINGS = {
@@ -33,7 +33,7 @@ def get_repos_with_supported_languages() -> List[trending.Repository]:
     return supported_repos
     
 def get_all_files(repo: trending.Repository) -> List[SingleGetContentObj]:
-    content = get_repo_contents(repo.owner, repo.name)
+    content = github_api.get_repo_contents(repo.owner, repo.name)
     dirs = extract_dirs(content)
     files = extract_files(content)
     
@@ -43,7 +43,7 @@ def get_all_files(repo: trending.Repository) -> List[SingleGetContentObj]:
     while dirs != []:
         current_dir = dirs.pop()
         print('current_dir: ', current_dir.name)
-        new_content = get_content(current_dir.url)
+        new_content = github_api.get_content(current_dir.url)
         new_dirs = extract_dirs(new_content)
         new_files = extract_files(new_content)
         files += new_files
