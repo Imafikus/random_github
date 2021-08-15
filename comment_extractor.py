@@ -15,8 +15,16 @@ MAX_COMMENT_NUMBER = int(os.environ['MAX_COMMENT_NUMBER'])
 
 
 def extract_python_comments(file_content) -> List[str]:
-    return re.findall(r'#.*', file_content)
+    comments = re.findall(r'#.*', file_content)
+    cleaned_comments = []
     
+    for comment in comments:
+        clean_part = comment.split('#')[1].strip()
+        if clean_part != '':
+            cleaned_comments.append(clean_part)
+    
+    return cleaned_comments
+        
 def get_comment() -> str:
     chosen_comments = []
     repos = data_extractor.get_repos_with_supported_languages()
@@ -29,5 +37,4 @@ def get_comment() -> str:
         
         if len(chosen_comments) >= MAX_COMMENT_NUMBER:
             break
-    
     return random.choice(chosen_comments)
