@@ -1,6 +1,4 @@
 from typing import List
-
-
 import re
 import data_extractor
 import github_api
