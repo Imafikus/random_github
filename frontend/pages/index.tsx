@@ -1,14 +1,16 @@
 import Head from 'next/head'
 import { useState } from 'react';
 import 'tailwindcss/tailwind.css'
+import * as api from '../api';
 
 export default function Home() {
   
   const [currentlyDisplayedComment, setCurrentlyDisplayedComment] = useState('Random github comments every day');
   
   
-  const getComment = () => {
-    setCurrentlyDisplayedComment('getComment')
+  const getComment = async () => {
+    const comment = await api.getComment();
+    setCurrentlyDisplayedComment(comment);
   }
   
   return (
