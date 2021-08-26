@@ -17,3 +17,6 @@ class SingleGetContentObj(BaseModel):
     _links: LinksType
 
     
+class ChoosenComment(BaseModel):
+    content: str
+    url: str

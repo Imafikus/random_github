@@ -42,7 +42,7 @@ def get_all_files(repo: trending.Repository) -> List[SingleGetContentObj]:
         
     while dirs != []:
         current_dir = dirs.pop()
-        print('current_dir: ', current_dir.name)
+        print(f'current_dir{current_dir}')
         new_content = github_api.get_content(current_dir.url)
         new_dirs = extract_dirs(new_content)
         new_files = extract_files(new_content)
