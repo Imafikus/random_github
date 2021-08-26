@@ -15,11 +15,26 @@ MAX_COMMENT_NUMBER = int(os.environ['MAX_COMMENT_NUMBER'])
 CURRENT_ENV = os.environ['ENV']
 
 test_comments = [
-    'Just for testing',
-    'Not real stuff',
-    'Whatever',
-    'Lorem ipsum',
-    'Testeroni testing test'
+    ChoosenComment(
+        content='Just for testing',
+        url='https://example.com/'
+    ),
+    ChoosenComment(
+        content='Not real stuff',
+        url='https://example.com/'
+    ),
+    ChoosenComment(
+        content='Whatever',
+        url='https://example.com/'
+    ),
+    ChoosenComment(
+        content='Testeroni testing test',
+        url='https://example.com/'
+    ),
+    ChoosenComment(
+        content='Lorem ipsum',
+        url='https://example.com/'
+    ),
 ]
 
 def extract_python_comments(file_content, file_url) -> List[ChoosenComment]:
@@ -41,8 +56,8 @@ def extract_python_comments(file_content, file_url) -> List[ChoosenComment]:
     
 def get_comment() -> ChoosenComment:
     
-    # if CURRENT_ENV == 'test':
-    #     return random.choice(test_comments)
+    if CURRENT_ENV == 'test':
+        return random.choice(test_comments)
     
     chosen_comments = []
     

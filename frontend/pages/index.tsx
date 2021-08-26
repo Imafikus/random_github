@@ -5,12 +5,23 @@ import * as api from '../api';
 
 export default function Home() {
   
-  const [currentlyDisplayedComment, setCurrentlyDisplayedComment] = useState('Random github comments every day');
+  const [currentlyDisplayedCommentContent, setCurrentlyDisplayedCommentContent] = useState('Random github comments every day');
+  const [currentlyDisplayedCommentSource, setCurrentlyDisplayedCommentSource] = useState('');
   
   
   const getComment = async () => {
     const comment = await api.getComment();
-    setCurrentlyDisplayedComment(comment);
+    setCurrentlyDisplayedCommentContent(comment.content);
+    setCurrentlyDisplayedCommentSource(comment.url);
+  }
+  
+  const displayLinkIfNeeded = () => {
+    if(currentlyDisplayedCommentSource != '') {
+      return (
+        <p className='hover:underline'><a href={currentlyDisplayedCommentSource}>Source</a></p>
+      )
+    }
+    return '';
   }
   
   return (
@@ -22,13 +33,17 @@ export default function Home() {
 
       <main className='m-auto w-full md:w-1/2'>
         <div className='text-center'>
-          <p className='text-2xl md:text-3xl p-2 my-2'>{currentlyDisplayedComment}</p>
+          <p className='text-2xl md:text-3xl p-2 my-2'>{currentlyDisplayedCommentContent}</p>
           <button 
             className=' p-2 bg-blue-500 hover:bg-blue-700 text-white text-xl md:text-2xl font-bold py-2 px-4 rounded-full'
             onClick={getComment}
           >
             Get random comment
           </button>
+        </div>
+        <p>{displayLinkIfNeeded()}</p>
+        <div>
+          
         </div>
       </main>
 
