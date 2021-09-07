@@ -54,8 +54,8 @@ def extract_python_comments(file_content, file_url) -> List[ChoosenComment]:
     
 def get_all_choosen_comments() -> List[ChoosenComment]:
     
-    # if CURRENT_ENV == 'test':
-    #     return test_comments
+    if CURRENT_ENV == 'test':
+        return test_comments
     
     chosen_comments = []
     
