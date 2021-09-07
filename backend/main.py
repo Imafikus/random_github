@@ -1,6 +1,7 @@
 import comment_extractor
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import datastore_db as db
 
 origins = [
     "http://localhost:3000",
@@ -33,4 +34,4 @@ def get_comment():
     }
             
 if __name__ == '__main__':
-    print('random comment: ', comment_extractor.get_comment())
+    db.insert_entity('whatever')
