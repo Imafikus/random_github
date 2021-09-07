@@ -34,4 +34,5 @@ def get_comment():
     }
             
 if __name__ == '__main__':
-    db.insert_choosen_comments(comment_extractor.get_all_choosen_comments())
+    # db.insert_choosen_comments(comment_extractor.get_all_choosen_comments())
+    print(db.get_choosen_comments())

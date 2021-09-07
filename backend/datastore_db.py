@@ -19,4 +19,11 @@ def insert_choosen_comments(data: List[ChoosenComment]):
     client.put(task)
     
 
-    
+def get_choosen_comments() -> List[ChoosenComment]:
+    complete_key = client.key('ChoosenComments', 'currently_active_comments')
+    data = dict(client.get(complete_key))
+    choosen_comments = []
+    for entity in data['data']:
+        entity_dict = dict(entity)
+        choosen_comments.append(ChoosenComment.parse_obj(entity_dict))
+    return choosen_comments
