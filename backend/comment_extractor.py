@@ -52,12 +52,10 @@ def extract_python_comments(file_content, file_url) -> List[ChoosenComment]:
     
     return cleaned_comments
     
-
+def get_all_choosen_comments() -> List[ChoosenComment]:
     
-def get_comment() -> ChoosenComment:
-    
-    if CURRENT_ENV == 'test':
-        return random.choice(test_comments)
+    # if CURRENT_ENV == 'test':
+    #     return test_comments
     
     chosen_comments = []
     
@@ -72,4 +70,7 @@ def get_comment() -> ChoosenComment:
         
         if len(chosen_comments) >= MAX_COMMENT_NUMBER:
             break
-    return random.choice(chosen_comments)
+    return chosen_comments
+    
+def get_comment() -> ChoosenComment:
+    return random.choice(get_all_choosen_comments())

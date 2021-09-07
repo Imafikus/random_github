@@ -25,6 +25,12 @@ def get_comment():
         'url': comment.url
     }
 
+@app.get('/all_comments')
+def get_comment():
+    all_comments = comment_extractor.get_all_choosen_comments()
+    return {
+        'all_comments': all_comments,
+    }
             
 if __name__ == '__main__':
     print('random comment: ', comment_extractor.get_comment())
