@@ -1,7 +1,7 @@
-import comment_extractor
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import datastore_db as db
+import random
 
 origins = [
     "http://localhost:3000",
@@ -20,7 +20,8 @@ app.add_middleware(
 
 @app.get('/comment')
 def get_comment():
-    comment = comment_extractor.get_comment()
+    all_comments = db.get_choosen_comments()
+    comment = random.choice(all_comments)
     return {
         'content': comment.content,
         'url': comment.url
@@ -28,11 +29,10 @@ def get_comment():
 
 @app.get('/all_comments')
 def get_comment():
-    all_comments = comment_extractor.get_all_choosen_comments()
+    all_comments = db.get_choosen_comments()
     return {
         'all_comments': all_comments,
     }
             
 if __name__ == '__main__':
-    # db.insert_choosen_comments(comment_extractor.get_all_choosen_comments())
     print(db.get_choosen_comments())
