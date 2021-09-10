@@ -8,7 +8,6 @@
 
 `$env:GOOGLE_APPLICATION_CREDENTIALS="key.json"`
 
-
 ## Setting up terraform
 
 Make sure you have `key.json` available

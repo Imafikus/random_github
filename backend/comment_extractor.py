@@ -75,5 +75,5 @@ def get_all_choosen_comments() -> List[ChoosenComment]:
 def get_comment() -> ChoosenComment:
     return random.choice(get_all_choosen_comments())
 
-if __name__ == '__main__':
-    print(get_comment())
+def main(message, context):
+    print('choosen comment is: ', get_comment())
