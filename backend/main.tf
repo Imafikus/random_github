@@ -34,7 +34,11 @@ module "data_extractor" {
     runtime = "python39"
     #FIXME
     env = {
-    
+        GITHUB_USERNAME = var.github_username
+        GITHUB_ACCESS_TOKEN = var.github_access_token
+        
+        MAX_COMMENT_NUMBER = var.max_comment_number
+        ENV = local.stage
     }
     
     files = [

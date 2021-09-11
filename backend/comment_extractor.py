@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 MAX_COMMENT_NUMBER = int(os.environ['MAX_COMMENT_NUMBER'])
 CURRENT_ENV = os.environ['ENV']
 
