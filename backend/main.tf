@@ -19,6 +19,19 @@ resource "google_pubsub_topic" "data_extractor_topic" {
     name = "random-github-project-data-extractor-${local.stage}"
 }
 
+
+resource "google_cloud_scheduler_job" "data_extractor_trigger" {
+    name        = "data-extractor-trigger"
+    description = "Triggers the data_extractor on every hour"
+    schedule    = "0 0 * * *"
+    time_zone = "Europe/London"
+
+    pubsub_target {
+        topic_name = google_pubsub_topic.data_extractor_topic.id
+        data       = base64encode("{}")
+    }
+}
+
 module "data_extractor" {
     source = "./terraform/modules/cloud_function"
 
