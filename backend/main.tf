@@ -26,7 +26,7 @@ module "data_extractor" {
     stage   = local.stage
     
     bucket_name = google_storage_bucket.cf_all_functions.name
-    function_name = "comment_extractor"
+    function_name = "data_extractor"
     function_entry_point = "main"
 
     trigger_id = google_pubsub_topic.data_extractor_topic.id
@@ -38,8 +38,9 @@ module "data_extractor" {
     }
     
     files = [
-        ["comment_extractor.py", "comment_extractor.py"],
+        ["comment_extractor.py", "main.py"],
         ["models.py", "models.py"],
+        ["github_api.py", "github_api.py"],
         ["data_extractor.py", "data_extractor.py"],
         ["datastore_db.py", "datastore_db.py"],
         ["requirements.txt", "requirements.txt"],
