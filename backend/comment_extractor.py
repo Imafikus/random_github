@@ -5,6 +5,7 @@ import data_extractor
 import github_api
 import os
 import random
+import datastore_db as db
 
 from dotenv import load_dotenv
 
@@ -75,4 +76,7 @@ def get_comment() -> ChoosenComment:
     return random.choice(get_all_choosen_comments())
 
 def main(message, context):
-    print('choosen comment is: ', get_comment())
+    db.insert_choosen_comments(get_all_choosen_comments())
+    
+if __name__ == "__main__":
+    main(None, None)
