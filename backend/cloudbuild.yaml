@@ -5,7 +5,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: 'build-server'
     entrypoint: bash
-    args: ['-c', 'docker build -t $$SERVER_IMAGE_NAME -f Dockerfile.server .']
+    args: ['-c', 'docker build -t $$SERVER_IMAGE_NAME -f ./backend/Dockerfile.server .']
     waitFor: ['-']
     
   - name: 'gcr.io/cloud-builders/docker'
