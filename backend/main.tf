@@ -4,7 +4,7 @@ locals {
 }
 
 provider "google" {
-    credentials = file("key.json")
+    # credentials = file("key.json")
     project = "${local.project}"
     region  = "europe-west1"
 }
