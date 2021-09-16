@@ -22,34 +22,24 @@ jobs:
       working-directory: ${{ env.working-directory }}
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        
-    - name: Terraform Destroy
+
+    - name: Terraform Format
+      run: terraform fmt -check
+      working-directory: ${{ env.working-directory }}
+    
+    - name: Terraform Plan
       run: |-
-        terraform apply \
-        -destroy
-        -auto-approve
+        terraform plan \
         -var 'github_access_token=$ACCESS_TOKEN_GITHUB'
       working-directory: ${{ env.working-directory }}
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-    
-    # - name: Terraform Format
-    #   run: terraform fmt -check
-    #   working-directory: ${{ env.working-directory }}
-    
-    # - name: Terraform Plan
-    #   run: |-
-    #     terraform plan \
-    #     -var 'github_access_token=$ACCESS_TOKEN_GITHUB'
-    #   working-directory: ${{ env.working-directory }}
-    #   env:
-    #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         
-    # - name: Terraform Apply
-    #   run: |-
-    #     terraform apply \
-    #     -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
-    #     -auto-approve
-    #   working-directory: ${{ env.working-directory }}
-    #   env:
-    #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+    - name: Terraform Apply
+      run: |-
+        terraform apply \
+        -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
+        -auto-approve
+      working-directory: ${{ env.working-directory }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
