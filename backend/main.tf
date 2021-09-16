@@ -4,16 +4,10 @@ locals {
 }
 
 provider "google" {
-    credentials = file("key.json")
+    # credentials = file("key.json")
     project = "${local.project}"
     region  = "europe-west1"
 }
-
-# FIXME
-# data "google_secret_manager_secret_version" "server_secrets" {
-#     provider = google
-#     secret  = "tf-server-secrets"
-# }
 
 resource "google_storage_bucket" "cf_all_functions" {
     name = "cf-all-functions-${local.stage}"
@@ -53,8 +47,8 @@ module "data_extractor" {
     runtime = "python39"
     #FIXME
     env = {
-        GITHUB_USERNAME = data.google_secret_manager_secret_version.server_secret.github_username
-        GITHUB_ACCESS_TOKEN = data.google_secret_manager_secret_version.server_secret.github_access_token
+        GITHUB_USERNAME = var.github_username
+        GITHUB_ACCESS_TOKEN = var.github_access_token
         
         MAX_COMMENT_NUMBER = var.max_comment_number
         ENV = local.stage

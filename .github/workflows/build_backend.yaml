@@ -1,0 +1,25 @@
+name: 'Build Backend'
+
+on: 
+  workflow_dispatch:
+
+jobs: 
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./backend
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ${{ env.working-directory }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+    
