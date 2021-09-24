@@ -9,11 +9,9 @@ provider "google" {
     region  = "europe-west1"
 }
 
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "tf-state-${project}-${stage}"
-
-  versioning {
-    enabled = true
+terraform {
+  backend "gcs" {
+    bucket = "tf-state-random-github-project-production"
   }
 }
 
