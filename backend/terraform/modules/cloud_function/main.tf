@@ -24,7 +24,7 @@ resource "google_storage_bucket_object" "zip" {
 
 # Create Cloud Function
 resource "google_cloudfunctions_function" "function" {
-  name     = "nm-${var.function_name}-${var.stage}"
+  name     = "rgp-${var.function_name}-${var.stage}"
   runtime = var.runtime
 
   available_memory_mb   = var.memory
