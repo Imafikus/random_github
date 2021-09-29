@@ -70,3 +70,15 @@ module "data_extractor" {
         ["trending.py", "trending.py"],
     ]
 }
+
+module "server" {
+  source = "./terraform/modules/cloudrun"
+
+  project = local.project
+  stage   = local.stage
+  svc     = "server"
+  label   = var.commit_sha
+
+  no_auth = true
+  max_instances = 2
+}
