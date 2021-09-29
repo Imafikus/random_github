@@ -77,6 +77,7 @@ module "server" {
   project = local.project
   stage   = local.stage
   svc     = "server"
+  label   = var.commit_sha
 
   no_auth = true
   max_instances = 2

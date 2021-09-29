@@ -13,3 +13,8 @@ variable "max_comment_number" {
     description = "Max number of comments extracted from a single repo"
     default = "20"
 }
+
+variable "commit_sha" {
+    type        = string
+    description = "Commit sha for the currently running job"
+}

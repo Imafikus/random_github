@@ -27,6 +27,7 @@ jobs:
       run: |-
         terraform plan \
         -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
+        -var 'commit_sha=$COMMIT_SHA'
       working-directory: ${{ env.working-directory }}
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
@@ -35,6 +36,7 @@ jobs:
       run: |-
         terraform apply \
         -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
+        -var 'commit_sha=$COMMIT_SHA' \
         -auto-approve
       working-directory: ${{ env.working-directory }}
       env:
