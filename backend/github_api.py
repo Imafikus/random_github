@@ -4,6 +4,7 @@ import requests
 from typing import List
 from dotenv import load_dotenv
 import os 
+import logging
 
 load_dotenv()
 
@@ -15,10 +16,10 @@ def _make_get_request(url: str):
     return requests.get(url, auth=(GITHUB_USERNAME, GITHUB_ACCESS_TOKEN))    
 
 def get_repo_contents(owner: str, repo_name: str, folder_path='') -> List[SingleGetContentObj]:
-    print(f'getting data for: {BASE_URL}/repos/{owner}/{repo_name}/contents/{folder_path}')
+    logging.info(f'getting data for: {BASE_URL}/repos/{owner}/{repo_name}/contents/{folder_path}')
     data = _make_get_request(f'{BASE_URL}/repos/{owner}/{repo_name}/contents/{folder_path}')    
     if not data.ok:
-        print('data not ok: ', data.text)
+        logging.error('data not ok: ', data.text)
         return []
     
     return parse_obj_as(List[SingleGetContentObj], data.json())
@@ -28,7 +29,7 @@ def get_content(url: str) -> List[SingleGetContentObj]:
     try:
         content = parse_obj_as(List[SingleGetContentObj], data.json())
     except Exception as e:
-        print(e)
+        logging.error('get_content failed', e)
         content = []
     
     return content

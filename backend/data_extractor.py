@@ -2,6 +2,7 @@ from models import SingleGetContentObj
 from typing import List
 import trending
 import github_api
+import logging
 
 SUPPORTED_LANGUAGES = ['Python']
 EXTENSION_MAPPINGS = {
@@ -33,7 +34,6 @@ def get_repos_with_supported_languages() -> List[trending.Repository]:
     "Get all trending repos which have language from SUPPORTED_LANGUAGES listed"
     all_repos = trending.extract_trending_repos()
     supported_repos = list(filter(lambda repo: repo.language in SUPPORTED_LANGUAGES, all_repos))
-    print('supported repos: ', supported_repos)
     return supported_repos
     
 def get_all_files(repo: trending.Repository) -> List[SingleGetContentObj]:

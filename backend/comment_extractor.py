@@ -6,10 +6,14 @@ import github_api
 import os
 import random
 import datastore_db as db
+import logging
 
 from dotenv import load_dotenv
 
 load_dotenv()
+
+logging.basicConfig(format='[%(levelname)s]: %(asctime)s @ %(filename)s/%(funcName)s:%(lineno)d - %(message)s ', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+
 
 MAX_COMMENT_NUMBER = int(os.environ['MAX_COMMENT_NUMBER'])
 CURRENT_ENV = os.environ['ENV']
@@ -55,6 +59,7 @@ def extract_python_comments(file_content, file_url) -> List[ChoosenComment]:
 def get_all_choosen_comments() -> List[ChoosenComment]:
     
     if CURRENT_ENV == 'test':
+        logging.info('Returning test_comments...')
         return test_comments
     
     chosen_comments = []
