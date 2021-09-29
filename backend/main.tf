@@ -28,7 +28,7 @@ resource "google_pubsub_topic" "data_extractor_topic" {
 
 resource "google_cloud_scheduler_job" "data_extractor_trigger" {
     name        = "data-extractor-trigger"
-    description = "Triggers the data_extractor on every hour"
+    description = "Triggers the data_extractor every day at 00:00"
     schedule    = "0 0 * * *"
     time_zone = "Europe/London"
 
