@@ -2,12 +2,12 @@ name: 'Build Backend'
 
 on: 
   workflow_dispatch:
+
 env:
   GITHUB_SHA: ${{ github.sha }} 
   GITHUB_REF: ${{ github.ref }} 
-  IMAGE: [IMAGE_NAME]
+  IMAGE: random-github-server
   REGISTRY_HOSTNAME: gcr.io
-
 
 jobs:
   Build and publish docker image:
