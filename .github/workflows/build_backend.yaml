@@ -32,7 +32,7 @@ jobs:
       run: |
         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
         echo $TAG
-        docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" \
+        docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG -f ./backend/Dockerfile.server ." \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" .
 
