@@ -29,40 +29,40 @@ jobs:
       working-directory: ./backend
     
 
-  # terraform:
-  #   name: 'Terraform'
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     working-directory: ./backend
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./backend
     
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v1
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
       
-  #   - name: Terraform Init
-  #     run: terraform init
-  #     working-directory: ${{ env.working-directory }}
-  #     env:
-  #       GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ${{ env.working-directory }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-  #   - name: Terraform Plan
-  #     run: |-
-  #       terraform plan \
-  #       -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
-  #       -var 'commit_sha=$COMMIT_SHA'
-  #     working-directory: ${{ env.working-directory }}
-  #     env:
-  #       GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+    - name: Terraform Plan
+      run: |-
+        terraform plan \
+        -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
+        -var 'commit_sha=$COMMIT_SHA'
+      working-directory: ${{ env.working-directory }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         
-  #   - name: Terraform Apply
-  #     run: |-
-  #       terraform apply \
-  #       -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
-  #       -var 'commit_sha=$COMMIT_SHA' \
-  #       -auto-approve
-  #     working-directory: ${{ env.working-directory }}
-  #     env:
-  #       GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+    - name: Terraform Apply
+      run: |-
+        terraform apply \
+        -var 'github_access_token=$ACCESS_TOKEN_GITHUB' \
+        -var 'commit_sha=$COMMIT_SHA' \
+        -auto-approve
+      working-directory: ${{ env.working-directory }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
