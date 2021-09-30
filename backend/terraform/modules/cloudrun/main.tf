@@ -11,7 +11,7 @@ resource "google_cloud_run_service" "service" {
       timeout_seconds = var.timeout_seconds
 
       containers {
-        image = "eu.gcr.io/${var.project}/random-github-me-${var.svc}-${var.stage}:${var.label}"
+        image = "eu.gcr.io/${var.project}/random-github-me-${var.svc}-${var.stage}@sha256:${var.label}"
         dynamic "env" {
           for_each = var.env
 
