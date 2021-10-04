@@ -48,12 +48,18 @@ resource "google_cloud_run_service" "service" {
 }
 
 data "google_iam_policy" "noauth" {
-  count = var.no_auth ? 1 : 0
-
   binding {
     role = "roles/run.invoker"
     members = [
       "allUsers",
     ]
   }
+}
+
+resource "google_cloud_run_service_iam_policy" "noauth" {
+  location = google_cloud_run_service.service.location
+  project  = google_cloud_run_service.service.project
+  service  = google_cloud_run_service.service.name
+
+  policy_data = data.google_iam_policy.noauth[0].policy_data
 }
