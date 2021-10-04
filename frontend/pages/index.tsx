@@ -16,7 +16,7 @@ export default function Home() {
   }
   
   const displayLinkIfNeeded = () => {
-    if(currentlyDisplayedCommentSource != '') {
+    if(!['', 'Unavailable'].includes(currentlyDisplayedCommentSource)) {
       return (
         <p className='hover:underline'><a href={currentlyDisplayedCommentSource}>Source</a></p>
       )
