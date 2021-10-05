@@ -10,7 +10,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket = "tf-state-random-github-project-production"
+    bucket = "tf-state-random-github-project-frontend-production"
   }
 }
 
