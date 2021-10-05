@@ -1,22 +1,18 @@
-FROM node:current-alpine AS base
-WORKDIR /base
-COPY package*.json ./
-RUN npm install
-COPY . .
+FROM node:current-alpine as dependencies
+COPY package.json ./
+RUN npm i
 
-FROM base AS build
-ENV NODE_ENV=production
-WORKDIR /build
-COPY --from=base /base ./
+FROM node:current-alpine as builder
+COPY . .
+COPY --from=dependencies node_modules ./node_modules
 RUN npm run build
 
-FROM node:current-alpine AS production
-ENV NODE_ENV=production
-WORKDIR /app
-COPY --from=build /build/package*.json ./
-COPY --from=build /build/.next ./.next
-COPY --from=build /build/public ./public
-RUN npm install next
+FROM node:current-alpine as runner
+ENV NODE_ENV production
+COPY --from=builder public ./public
+COPY --from=builder .next ./.next
+COPY --from=builder node_modules ./node_modules
+COPY --from=builder package.json ./package.json
 
 EXPOSE 3000
-CMD npm run start
+CMD ["npm", "run", "start"]
