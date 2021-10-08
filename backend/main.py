@@ -5,7 +5,7 @@ import random
 
 origins = [
     'http://localhost:3000',
-    'https://random-github-production-frontend-spsikwsyha-ew.a.run.app/'
+    'https://random-github-production-frontend-spsikwsyha-ew.a.run.app'
 ]
 
 app = FastAPI()
