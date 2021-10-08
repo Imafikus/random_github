@@ -5,7 +5,7 @@ on:
   
   push:
     tags:
-      'server-v.*'
+      - 'server-v.*'
 
 env:
   IMAGE_NAME: random-github-server-production
