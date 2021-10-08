@@ -2,6 +2,10 @@ name: 'Build Backend'
 
 on: 
   workflow_dispatch:
+  
+  push:
+    tags:
+      'server-v.*'
 
 env:
   IMAGE_NAME: random-github-server-production
