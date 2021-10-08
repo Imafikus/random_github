@@ -2,6 +2,10 @@ name: 'Build Frontend'
 
 on: 
   workflow_dispatch:
+  
+  push:
+    tags:
+      - 'frontend-v*'
 
 env:
   IMAGE_NAME: random-github-frontend-production
