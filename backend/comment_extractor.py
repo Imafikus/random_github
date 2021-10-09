@@ -77,9 +77,6 @@ def get_all_choosen_comments() -> List[ChoosenComment]:
             break
     return chosen_comments
     
-def get_comment() -> ChoosenComment:
-    return random.choice(get_all_choosen_comments())
-
 def main(message, context):
     db.insert_choosen_comments(get_all_choosen_comments())
     

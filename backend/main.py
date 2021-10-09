@@ -27,13 +27,6 @@ def get_comment():
         'content': comment.content,
         'url': comment.url
     }
-
-@app.get('/all_comments')
-def get_comment():
-    all_comments = db.get_choosen_comments()
-    return {
-        'all_comments': all_comments,
-    }
             
 if __name__ == '__main__':
     print(db.get_choosen_comments())
