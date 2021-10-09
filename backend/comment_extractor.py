@@ -73,6 +73,8 @@ def get_all_choosen_comments() -> List[ChoosenComment]:
             file_content = github_api.get_raw_data(f.download_url)
             chosen_comments += extract_python_comments(file_content, f.html_url)
         
+        logging.info(f'Current number of comments: {len(chosen_comments)}')
+        
         if len(chosen_comments) >= MAX_COMMENT_NUMBER:
             break
     return chosen_comments

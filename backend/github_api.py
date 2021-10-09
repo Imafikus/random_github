@@ -40,5 +40,5 @@ def get_raw_data(url: str):
     return data.text
     
 def get_trending_page():
-    data = _make_get_request('https://github.com/trending?spoken_language_code=en')
+    data = _make_get_request('https://github.com/trending/python?since=daily&spoken_language_code=en') #TODO: Fix this when more than 1 language is supported
     return data.text
