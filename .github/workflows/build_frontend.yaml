@@ -58,7 +58,7 @@ jobs:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Terraform force unlock
-      run: terraform force-unlock 1633870084444399
+      run: terraform force-unlock -force 1633870084444399
       working-directory: ${{ env.WORKING_DIRECTORY }}
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
