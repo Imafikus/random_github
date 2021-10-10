@@ -50,9 +50,15 @@ jobs:
     
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-      
+    
     - name: Terraform Init
       run: terraform init
+      working-directory: ${{ env.WORKING_DIRECTORY }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+    - name: Terraform force unlock
+      run: terraform force-unlock 1633870084444399
       working-directory: ${{ env.WORKING_DIRECTORY }}
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
