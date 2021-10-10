@@ -8,10 +8,16 @@ variable "github_access_token" {
     description = "Token used when consuming GitHub API"
     sensitive   = true
 }
-variable "max_comment_number" {
+variable "max_comment_number_per_repo" {
     type        = string
     description = "Max number of comments extracted from a single repo"
-    default = "20"
+    default = "10"
+}
+
+variable "max_comment_number_global" {
+    type        = string
+    description = "Max number of comments extracted globally"
+    default = "100"
 }
 
 variable "commit_sha" {
