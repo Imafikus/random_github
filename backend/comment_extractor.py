@@ -54,14 +54,18 @@ def extract_single_random_python_comment(file_content, file_url) -> Optional[Cho
                 url=file_url
             )
             cleaned_comments.append(comment)
+            
+    if len(cleaned_comments) == 0:
+        logging.info('No comments found, returning None...')
+        return None
     
     return random.choice(cleaned_comments)
     
 def get_all_choosen_comments() -> List[ChoosenComment]:
     
-    # if CURRENT_ENV == 'test':
-    #     logging.info('Returning test_comments...')
-    #     return test_comments
+    if CURRENT_ENV == 'test':
+        logging.info('Returning test_comments...')
+        return test_comments
     
     chosen_comments = []
     
@@ -78,7 +82,9 @@ def get_all_choosen_comments() -> List[ChoosenComment]:
         for f in language_specific_files:
             
             file_content = github_api.get_raw_data(f.download_url)
-            repo_comments.append(extract_single_random_python_comment(file_content, f.html_url))
+            single_comment = extract_single_random_python_comment(file_content, f.html_url)
+            if single_comment is not None:
+                repo_comments.append(single_comment)
         
             if len(repo_comments) >= MAX_COMMENT_NUMBER_PER_REPO:
                 logging.info(f'Max comment number reached for repo: {repo.name}')
