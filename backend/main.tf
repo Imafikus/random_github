@@ -55,7 +55,8 @@ module "data_extractor" {
         GITHUB_USERNAME = var.github_username
         GITHUB_ACCESS_TOKEN = var.github_access_token
         
-        MAX_COMMENT_NUMBER = var.max_comment_number
+        MAX_COMMENT_NUMBER_PER_REPO = var.max_comment_number_per_repo 
+        MAX_COMMENT_NUMBER_GLOBAL = var.max_comment_number_global
         ENV = local.stage
     }
     
